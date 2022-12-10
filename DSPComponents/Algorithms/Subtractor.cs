@@ -13,13 +13,17 @@ namespace DSPAlgorithms.Algorithms
         public Signal InputSignal2 { get; set; }
         public Signal OutputSignal { get; set; }
 
-        /// <summary>
-        /// To do: Subtract Signal2 from Signal1 
-        /// i.e OutSig = Sig1 - Sig2 
-        /// </summary>
         public override void Run()
         {
-            throw new NotImplementedException();
+            List<float> output = new List<float>();
+            int n;
+            if (InputSignal1.Samples.Count >= InputSignal2.Samples.Count)
+                n = InputSignal1.Samples.Count;
+            else
+                n = InputSignal2.Samples.Count;
+            for (int i = 0; i < n; i++)
+                output.Add(InputSignal1.Samples[i] + (-1) * InputSignal2.Samples[i]);
+            OutputSignal = new Signal(output, true);
         }
     }
 }
